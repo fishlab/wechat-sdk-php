@@ -34,28 +34,32 @@ class WechatMicroPayment extends WechatPaymentSupport
 		//①、提交被扫支付
 		$microPayInput ->setWxPayApi($this->wxPayApi);
 		$result = $this->wxPayApi->micropay($microPayInput, 5);
+
 		//如果返回成功
-		if(!array_key_exists("return_code", $result)
+/*		if(!array_key_exists("return_code", $result)
 			|| !array_key_exists("out_trade_no", $result)
+			|| !array_key_exists("result_code", $result))*/
+		if(!array_key_exists("return_code", $result)
 			|| !array_key_exists("result_code", $result))
 		{
-			throw new \WxPayException("接口调用失败,请确认是否输入是否有误！");
+			throw new \WxPayException("interface_get_failure");
 		}
-		
+
 		//签名验证
 		$out_trade_no = $microPayInput->GetOut_trade_no();
-		
+
 		//②、接口调用成功，明确返回调用失败
 		if($result["return_code"] == "SUCCESS" &&
 		   $result["result_code"] == "FAIL" && 
 		   $result["err_code"] != "USERPAYING" && 
 		   $result["err_code"] != "SYSTEMERROR")
 		{
-			return false;
+			throw new \WxPayException($result['err_code']);
+//			return false;
 		}
 
 		//③、确认支付是否成功
-		$queryTimes = 10;
+		$queryTimes = 6;
 		while($queryTimes > 0)
 		{
 			$succResult = 0;
@@ -63,21 +67,24 @@ class WechatMicroPayment extends WechatPaymentSupport
 			//如果需要等待1s后继续
 			if($succResult == 2){
 				sleep(2);
+				$queryTimes--;
 				continue;
 			} else if($succResult == 1){//查询成功
 				return $queryResult;
 			} else {//订单交易失败
 				return false;
 			}
+
 		}
 		
 		//④、次确认失败，则撤销订单
 		if(!$this->cancel($out_trade_no))
 		{
-			throw new \WxpayException("撤销单失败！");
+			throw new \WxpayException("cancel_order_failure");
 		}
+		throw new \Exception("wait_pay_time_out");
 
-		return false;
+//		return false;
 	}
 	
 	/**
@@ -134,9 +141,9 @@ class WechatMicroPayment extends WechatPaymentSupport
 		}
 		
 		$clostOrder = new \WxPayReverse();
+		$clostOrder->setWxPayApi($this->wxPayApi);
 		$clostOrder->SetOut_trade_no($out_trade_no);
 		$result = $this->wxPayApi->reverse($clostOrder);
-		
 		//接口调用失败
 		if($result["return_code"] != "SUCCESS"){
 			return false;
