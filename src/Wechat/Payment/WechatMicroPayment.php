@@ -33,7 +33,7 @@ class WechatMicroPayment extends WechatPaymentSupport
 	{
 		//①、提交被扫支付
 		$microPayInput ->setWxPayApi($this->wxPayApi);
-		$result = $this->wxPayApi->micropay($microPayInput, 5);
+		$result = $this->wxPayApi->micropay($microPayInput, $this->wxPayConfig['CURL_TIMEOUT']);
 
 		//如果返回成功
 /*		if(!array_key_exists("return_code", $result)

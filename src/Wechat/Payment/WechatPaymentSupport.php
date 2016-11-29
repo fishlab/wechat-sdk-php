@@ -18,6 +18,8 @@ abstract class WechatPaymentSupport
 
     protected $trade_type;
 
+    protected $wxPayConfig;
+
     protected $wxPayApi;
 
     static function loadWechatPaymentData(){
@@ -27,8 +29,8 @@ abstract class WechatPaymentSupport
     public function __construct(array $wxPayConfig)
     {
         $defaultConfig = require(__DIR__.'/config/wechat.payment.default.config.php');
-        $wxPayConfig = array_merge($defaultConfig,$wxPayConfig);
-        $this->wxPayApi = new \WxPayApi($wxPayConfig);
+        $this->wxPayConfig = array_merge($defaultConfig,$wxPayConfig);
+        $this->wxPayApi = new \WxPayApi( $this->wxPayConfig );
     }
 
     /**
