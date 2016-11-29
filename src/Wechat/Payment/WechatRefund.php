@@ -39,7 +39,7 @@ class WechatRefund extends WechatPaymentSupport
         $WxPayRefundQuery =new \WxPayRefundQuery();
         $WxPayRefundQuery->SetOut_trade_no($out_trade_no);
         $WxPayRefundQuery->setWxPayApi($this->wxPayApi);
-        $result = $this->wxPayApi->refundQuery($WxPayRefundQuery);
+        $result = $this->wxPayApi->refundQuery($WxPayRefundQuery,$this->wxPayConfig['CURL_TIMEOUT']);
         if($result['return_code']=='FAIL'){
             throw new \WxPayException($result['return_msg']);
         }
@@ -63,7 +63,7 @@ class WechatRefund extends WechatPaymentSupport
         $WxPayRefund->SetTotal_fee($fee);
         $WxPayRefund->SetRefund_fee($fee);
         $WxPayRefund->SetOp_user_id($this->wxPayApi->getWxPayConfig()['MCHID']);
-        $result=$this->wxPayApi->refund($WxPayRefund);
+        $result=$this->wxPayApi->refund($WxPayRefund, $this->wxPayConfig['CURL_TIMEOUT'] );
         if($result['return_code']=='FAIL'){//系统出错
             throw new \WxPayException("接口调用失败！".$result['return_msg']);
         }
