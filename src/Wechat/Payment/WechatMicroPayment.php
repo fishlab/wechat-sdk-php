@@ -98,9 +98,9 @@ class WechatMicroPayment extends WechatPaymentSupport
 	{
 		$queryOrderInput = new \WxPayOrderQuery();
 		$queryOrderInput ->setWxPayApi($this->wxPayApi);
-
+        \Log::info( 'curl timeout :' . $this->wxPayConfig['CURL_TIMEOUT']);
 		$queryOrderInput->SetOut_trade_no($out_trade_no);
-		$result = $this->wxPayApi->orderQuery($queryOrderInput);
+		$result = $this->wxPayApi->orderQuery($queryOrderInput, $this->wxPayConfig['CURL_TIMEOUT']);
 		
 		if($result["return_code"] == "SUCCESS" 
 			&& $result["result_code"] == "SUCCESS")
@@ -143,7 +143,7 @@ class WechatMicroPayment extends WechatPaymentSupport
 		$clostOrder = new \WxPayReverse();
 		$clostOrder->setWxPayApi($this->wxPayApi);
 		$clostOrder->SetOut_trade_no($out_trade_no);
-		$result = $this->wxPayApi->reverse($clostOrder);
+		$result = $this->wxPayApi->reverse($clostOrder,$this->wxPayConfig['CURL_TIMEOUT']);
 		//接口调用失败
 		if($result["return_code"] != "SUCCESS"){
 			return false;
