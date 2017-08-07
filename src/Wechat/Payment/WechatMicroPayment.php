@@ -29,7 +29,7 @@ class WechatMicroPayment extends WechatPaymentSupport
 	 * @throws WxpayException
 	 * @return 返回查询接口的结果
 	 */
-	public function pay($microPayInput)
+	public function pay($microPayInput,$maxQueryTimes=6,$queryInterval=2)
 	{
 		//①、提交被扫支付
 		$microPayInput ->setWxPayApi($this->wxPayApi);
@@ -59,14 +59,14 @@ class WechatMicroPayment extends WechatPaymentSupport
 		}
 
 		//③、确认支付是否成功
-		$queryTimes = 6;
+		$queryTimes = $maxQueryTimes;
 		while($queryTimes > 0)
 		{
 			$succResult = 0;
 			$queryResult = $this->query($out_trade_no, $succResult);
 			//如果需要等待1s后继续
 			if($succResult == 2){
-				sleep(2);
+				sleep($queryInterval);
 				$queryTimes--;
 				continue;
 			} else if($succResult == 1){//查询成功
@@ -118,7 +118,7 @@ class WechatMicroPayment extends WechatPaymentSupport
 		}
 		
 		//如果返回错误码为“此交易订单号不存在”则直接认定失败
-		if($result["err_code"] == "ORDERNOTEXIST")
+		if(isset($result["err_code"]) && $result["err_code"] == "ORDERNOTEXIST")
 		{
 			$succCode = 0;
 		} else{
@@ -145,7 +145,10 @@ class WechatMicroPayment extends WechatPaymentSupport
 		$clostOrder->SetOut_trade_no($out_trade_no);
 		$result = $this->wxPayApi->reverse($clostOrder,$this->wxPayConfig['CURL_TIMEOUT']);
 		//接口调用失败
-		if($result["return_code"] != "SUCCESS"){
+		if (!isset($result["return_code"]) ){
+		    return false;
+        }
+        if($result["return_code"] != "SUCCESS"){
 			return false;
 		}
 		
