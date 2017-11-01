@@ -1,5 +1,6 @@
 wechat-sdk-php
-==============
-a modification of wechat  php sdk
+====
+
+a modification of wechat php sdk
 
 

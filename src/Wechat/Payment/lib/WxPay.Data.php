@@ -358,6 +358,23 @@ class WxPayUnifiedOrder extends WxPayDataBase
 		return array_key_exists('mch_id', $this->values);
 	}
 
+    /**
+     * 设置微信支付分配的子商户号
+     * @param string $value
+     **/
+    public function SetSub_Mch_id($value)
+    {
+        $this->values['sub_mch_id'] = $value;
+    }
+    /**
+     * 获取微信支付分配的子商户号的值
+     * @return 值
+     **/
+    public function GetSub_Mch_id()
+    {
+        return $this->values['sub_mch_id'];
+    }
+
 
 	/**
 	* 设置微信支付分配的终端设备号，商户自定义
@@ -824,7 +841,25 @@ class WxPayOrderQuery extends WxPayDataBase
 	{
 		return $this->values['mch_id'];
 	}
-	/**
+
+    /**
+     * 设置微信支付分配的子商户号
+     * @param string $value
+     **/
+    public function SetSub_Mch_id($value)
+    {
+        $this->values['sub_mch_id'] = $value;
+    }
+    /**
+     * 获取微信支付分配的子商户号的值
+     * @return 值
+     **/
+    public function GetSub_Mch_id()
+    {
+        return $this->values['sub_mch_id'];
+    }
+
+    /**
 	* 判断微信支付分配的商户号是否存在
 	* @return true 或 false
 	**/
@@ -972,6 +1007,24 @@ class WxPayCloseOrder extends WxPayDataBase
 	}
 
 
+    /**
+     * 设置微信支付分配的子商户号
+     * @param string $value
+     **/
+    public function SetSub_Mch_id($value)
+    {
+        $this->values['sub_mch_id'] = $value;
+    }
+    /**
+     * 获取微信支付分配的子商户号的值
+     * @return 值
+     **/
+    public function GetSub_Mch_id()
+    {
+        return $this->values['sub_mch_id'];
+    }
+
+
 	/**
 	* 设置商户系统内部的订单号
 	* @param string $value 
@@ -1083,6 +1136,23 @@ class WxPayRefund extends WxPayDataBase
 		return array_key_exists('mch_id', $this->values);
 	}
 
+
+    /**
+     * 设置微信支付分配的子商户号
+     * @param string $value
+     **/
+    public function SetSub_Mch_id($value)
+    {
+        $this->values['sub_mch_id'] = $value;
+    }
+    /**
+     * 获取微信支付分配的子商户号的值
+     * @return 值
+     **/
+    public function GetSub_Mch_id()
+    {
+        return $this->values['sub_mch_id'];
+    }
 
 	/**
 	* 设置微信支付分配的终端设备号，与下单一致
@@ -1377,6 +1447,23 @@ class WxPayRefundQuery extends WxPayDataBase
 	}
 
 
+    /**
+     * 设置微信支付分配的子商户号
+     * @param string $value
+     **/
+    public function SetSub_Mch_id($value)
+    {
+        $this->values['sub_mch_id'] = $value;
+    }
+    /**
+     * 获取微信支付分配的子商户号的值
+     * @return 值
+     **/
+    public function GetSub_Mch_id()
+    {
+        return $this->values['sub_mch_id'];
+    }
+
 	/**
 	* 设置微信支付分配的终端设备号
 	* @param string $value 
@@ -1591,6 +1678,23 @@ class WxPayDownloadBill extends WxPayDataBase
 		return array_key_exists('mch_id', $this->values);
 	}
 
+
+    /**
+     * 设置微信支付分配的子商户号
+     * @param string $value
+     **/
+    public function SetSub_Mch_id($value)
+    {
+        $this->values['sub_mch_id'] = $value;
+    }
+    /**
+     * 获取微信支付分配的子商户号的值
+     * @return 值
+     **/
+    public function GetSub_Mch_id()
+    {
+        return $this->values['sub_mch_id'];
+    }
 
 	/**
 	* 设置微信支付分配的终端设备号，填写此字段，只下载该设备号的对账单
@@ -2229,6 +2333,24 @@ class WxPayMicroPay extends WxPayDataBase
 	{
 		return $this->values['mch_id'];
 	}
+
+    /**
+     * 设置微信支付分配的子商户号
+     * @param string $value
+     **/
+    public function SetSub_Mch_id($value)
+    {
+        $this->values['sub_mch_id'] = $value;
+    }
+    /**
+     * 获取微信支付分配的子商户号的值
+     * @return 值
+     **/
+    public function GetSub_Mch_id()
+    {
+        return $this->values['sub_mch_id'];
+    }
+
 	/**
 	* 判断微信支付分配的商户号是否存在
 	* @return true 或 false
@@ -2635,8 +2757,26 @@ class WxPayReverse extends WxPayDataBase
 		return array_key_exists('mch_id', $this->values);
 	}
 
+    /**
+     * 设置微信支付分配的子商户号
+     * @param string $value
+     **/
+    public function SetSub_Mch_id($value)
+    {
+        $this->values['sub_mch_id'] = $value;
+    }
+    /**
+     * 获取微信支付分配的子商户号的值
+     * @return 值
+     **/
+    public function GetSub_Mch_id()
+    {
+        return $this->values['sub_mch_id'];
+    }
 
-	/**
+
+
+    /**
 	* 设置微信的订单号，优先使用
 	* @param string $value 
 	**/

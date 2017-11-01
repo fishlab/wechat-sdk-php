@@ -70,6 +70,14 @@ class WxPayApi
 		$inputObj->SetAppid($this->wxPayConfig['APPID']);//公众账号ID
 		$inputObj->SetMch_id($this->wxPayConfig['MCHID']);//商户号
 
+
+        if (array_key_exists('SUB_MODE',$this->wxPayConfig) && $this->wxPayConfig['SUB_MODE'] ) {
+            if ( array_key_exists( 'SUB_MCHID',$this->wxPayConfig) ){
+                $sub_mch_id = $this->wxPayConfig['SUB_MCHID'];
+                $inputObj->SetSub_Mch_id( $sub_mch_id );
+            }
+        }
+
 		try {
 			$inputObj->SetSpbill_create_ip($_SERVER['REMOTE_ADDR']);//终端ip
 		}catch (\Exception $e) {
@@ -108,6 +116,14 @@ class WxPayApi
 		}
 		$inputObj->SetAppid($this->wxPayConfig['APPID']);//公众账号ID
 		$inputObj->SetMch_id($this->wxPayConfig['MCHID']);//商户号
+
+        if (array_key_exists('SUB_MODE',$this->wxPayConfig) && $this->wxPayConfig['SUB_MODE'] ) {
+            if ( array_key_exists( 'SUB_MCHID',$this->wxPayConfig) ){
+                $sub_mch_id = $this->wxPayConfig['SUB_MCHID'];
+                $inputObj->SetSub_Mch_id( $sub_mch_id );
+            }
+        }
+
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
 		
 		$inputObj->SetSign();//签名
@@ -116,7 +132,7 @@ class WxPayApi
 		$startTimeStamp = self::getMillisecond();//请求开始时间
 		$response = $this->postXmlCurl($xml, $url, false, $timeOut);
 		$result = WxPayResults::Init($response,$this->wxPayConfig);
-		$this->reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
+//		$this->reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
 		
 		return $result;
 	}
@@ -139,6 +155,14 @@ class WxPayApi
 		}
 		$inputObj->SetAppid($this->wxPayConfig['APPID']);//公众账号ID
 		$inputObj->SetMch_id($this->wxPayConfig['MCHID']);//商户号
+
+        if (array_key_exists('SUB_MODE',$this->wxPayConfig) && $this->wxPayConfig['SUB_MODE'] ) {
+            if ( array_key_exists( 'SUB_MCHID',$this->wxPayConfig) ){
+                $sub_mch_id = $this->wxPayConfig['SUB_MCHID'];
+                $inputObj->SetSub_Mch_id( $sub_mch_id );
+            }
+        }
+
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
 		
 		$inputObj->SetSign();//签名
@@ -179,6 +203,14 @@ class WxPayApi
 		}
 		$inputObj->SetAppid($this->wxPayConfig['APPID']);//公众账号ID
 		$inputObj->SetMch_id($this->wxPayConfig['MCHID']);//商户号
+
+        if (array_key_exists('SUB_MODE',$this->wxPayConfig) && $this->wxPayConfig['SUB_MODE'] ) {
+            if ( array_key_exists( 'SUB_MCHID',$this->wxPayConfig) ){
+                $sub_mch_id = $this->wxPayConfig['SUB_MCHID'];
+                $inputObj->SetSub_Mch_id( $sub_mch_id );
+            }
+        }
+
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
 		
 		$inputObj->SetSign();//签名
@@ -186,7 +218,7 @@ class WxPayApi
 		$startTimeStamp = self::getMillisecond();//请求开始时间
 		$response = $this->postXmlCurl($xml, $url, true, $timeOut);
 		$result = WxPayResults::Init($response,$this->wxPayConfig);
-		$this->reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
+//		$this->reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
 		
 		return $result;
 	}
@@ -215,6 +247,14 @@ class WxPayApi
 		}
 		$inputObj->SetAppid($this->wxPayConfig['APPID']);//公众账号ID
 		$inputObj->SetMch_id($this->wxPayConfig['MCHID']);//商户号
+
+        if (array_key_exists('SUB_MODE',$this->wxPayConfig) && $this->wxPayConfig['SUB_MODE'] ) {
+            if ( array_key_exists( 'SUB_MCHID',$this->wxPayConfig) ){
+                $sub_mch_id = $this->wxPayConfig['SUB_MCHID'];
+                $inputObj->SetSub_Mch_id( $sub_mch_id );
+            }
+        }
+
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
 		
 		$inputObj->SetSign();//签名
@@ -223,7 +263,7 @@ class WxPayApi
 		$startTimeStamp = self::getMillisecond();//请求开始时间
 		$response = $this->postXmlCurl($xml, $url, false, $timeOut);
 		$result = WxPayResults::Init($response,$this->wxPayConfig);
-		$this->reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
+//		$this->reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
 		
 		return $result;
 	}
@@ -245,6 +285,14 @@ class WxPayApi
 		}
 		$inputObj->SetAppid($this->wxPayConfig['APPID']);//公众账号ID
 		$inputObj->SetMch_id($this->wxPayConfig['MCHID']);//商户号
+
+        if (array_key_exists('SUB_MODE',$this->wxPayConfig) && $this->wxPayConfig['SUB_MODE'] ) {
+            if ( array_key_exists( 'SUB_MCHID',$this->wxPayConfig) ){
+                $sub_mch_id = $this->wxPayConfig['SUB_MCHID'];
+                $inputObj->SetSub_Mch_id( $sub_mch_id );
+            }
+        }
+
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
 		
 		$inputObj->SetSign();//签名
@@ -263,7 +311,7 @@ class WxPayApi
 	 * 由商户收银台或者商户后台调用该接口发起支付。
 	 * WxPayWxPayMicroPay中body、out_trade_no、total_fee、auth_code参数必填
 	 * appid、mchid、spbill_create_ip、nonce_str不需要填入
-	 * @param WxPayWxPayMicroPay $inputObj
+	 * @param WxPayMicroPay $inputObj
 	 * @param int $timeOut
 	 */
 	public function micropay($inputObj, $timeOut = 10)
@@ -287,15 +335,23 @@ class WxPayApi
 		}
 		$inputObj->SetAppid($this->wxPayConfig['APPID']);//公众账号ID
 		$inputObj->SetMch_id($this->wxPayConfig['MCHID']);//商户号
+
+        if (array_key_exists('SUB_MODE',$this->wxPayConfig) && $this->wxPayConfig['SUB_MODE'] ) {
+            if ( array_key_exists( 'SUB_MCHID',$this->wxPayConfig) ){
+                $sub_mch_id = $this->wxPayConfig['SUB_MCHID'];
+                $inputObj->SetSub_Mch_id( $sub_mch_id );
+            }
+        }
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
 		
 		$inputObj->SetSign();//签名
 		$xml = $inputObj->ToXml();
-		
-		$startTimeStamp = self::getMillisecond();//请求开始时间
+        \Log::info('xml:'.$xml);
+
+        $startTimeStamp = self::getMillisecond();//请求开始时间
 		$response = $this->postXmlCurl($xml, $url, false, $timeOut);
 		$result = WxPayResults::Init($response,$this->wxPayConfig);
-		$this->reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
+//		$this->reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
 		
 		return $result;
 	}
@@ -318,6 +374,14 @@ class WxPayApi
 		
 		$inputObj->SetAppid($this->wxPayConfig['APPID']);//公众账号ID
 		$inputObj->SetMch_id($this->wxPayConfig['MCHID']);//商户号
+
+        if (array_key_exists('SUB_MODE',$this->wxPayConfig) && $this->wxPayConfig['SUB_MODE'] ) {
+            if ( array_key_exists( 'SUB_MCHID',$this->wxPayConfig) ){
+                $sub_mch_id = $this->wxPayConfig['SUB_MCHID'];
+                $inputObj->SetSub_Mch_id( $sub_mch_id );
+            }
+        }
+
 		$inputObj->SetNonce_str(self::getNonceStr());//随机字符串
 		
 		$inputObj->SetSign();//签名
@@ -326,7 +390,7 @@ class WxPayApi
 		$startTimeStamp = self::getMillisecond();//请求开始时间
 		$response = $this->postXmlCurl($xml, $url, true, $timeOut);
 		$result = WxPayResults::Init($response,$this->wxPayConfig);
-		$this->reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
+//		$this->reportCostTime($url, $startTimeStamp, $result);//上报请求花费时间
 		
 		return $result;
 	}
